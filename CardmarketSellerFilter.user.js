@@ -31,6 +31,9 @@ function sellerFilterFunction() {
     var elements = $(".article-row"); //document.getElementsByClassName("article-row");
     for(let element of elements)
     {
+        if (element.style.display === 'none') {
+            continue;
+        }
         var sellerInfoPageURL = element.querySelector('a').href;
         console.log('seller info page URL: ' + sellerInfoPageURL);
         var sellerInfoPageHTML = getRemote(sellerInfoPageURL);
