@@ -27,7 +27,7 @@ MY_CITIES.add("München");
 MY_CITIES.add("Muenchen");
 MY_CITIES.add("Pireaus");
 
-$( document ).ready(function() {
+function sellerFilterFunction() {
     var elements = $(".article-row"); //document.getElementsByClassName("article-row");
     for(let element of elements)
     {
@@ -56,7 +56,19 @@ $( document ).ready(function() {
             }
         });
     }
+}
 
+$( document ).ready(function() {
+    $(`
+<div id="sellerFilter" class="p-0">
+    <button type="submit" id="sellerFilterButton" class="btn btn-primary btn-sm btn-block">
+        <span class="fonticon-filter cursor-pointer"></span>
+        <span>Filter sellers</span>
+    </button>
+    <br />
+</div>
+`).prependTo( $( ".table.article-table.table-striped" ) );
+    $("#sellerFilterButton").click(sellerFilterFunction);
 });
 
 (function() {
