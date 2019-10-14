@@ -27,6 +27,17 @@ MY_CITIES.add("München");
 MY_CITIES.add("Muenchen");
 MY_CITIES.add("Pireaus");
 
+function sellerNameOrCityIncludesMyCity(sellerNameOrCity) {
+    var sellerNameOrCityCopy = sellerNameOrCity.toLowerCase();
+    for (let myCity of MY_CITIES) {
+        myCity = myCity.toLowerCase();
+        if (sellerNameOrCityCopy.includes(myCity)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function sellerFilterFunction() {
     var elements = $(".article-row"); //document.getElementsByClassName("article-row");
     for(let element of elements)
@@ -35,25 +46,25 @@ function sellerFilterFunction() {
             continue;
         }
         var sellerInfoPageURL = element.querySelector('a').href;
-        console.log('seller info page URL: ' + sellerInfoPageURL);
+        var sellerName = element.querySelector('a').text;
+        if (sellerNameOrCityIncludesMyCity(sellerName)) {
+            console.log(sellerName + '\'s name, includes my city ' + myCity + '! Keeping :)');
+            continue;
+        }
+        console.log(sellerName + '\'s info page URL: ' + sellerInfoPageURL);
         var sellerInfoPageHTML = getRemote(sellerInfoPageURL);
-        console.log('seller info page HTML: ' + sellerInfoPageHTML);
+        console.log(sellerName + '\'s info page HTML: ' + sellerInfoPageHTML);
         $(sellerInfoPageHTML).find('.MKMTable.sellerInfo-table').find('> tbody > tr').each(function() {
             var col1 = jQuery(this).find("td:eq(0)").text();
-            if (col1 === "City") {
+            if (col1 === 'City') {
                 var sellerCity = jQuery(this).find("td:eq(1)").text();
-                console.log("seller city: " + sellerCity);
+                console.log(sellerName + '\'s city: ' + sellerCity);
                 var sellerIsInMyCities = false;
                 sellerCity = sellerCity.toLowerCase();
-                for (let myCity of MY_CITIES) {
-                    myCity = myCity.toLowerCase();
-                    if (sellerCity.includes(myCity)) {
-                        console.log("sellerCity: " + sellerCity + " includes myCity: " + myCity + "! Keeping :)");
-                        sellerIsInMyCities = true;
-                        break;
-                    }
+                if (sellerNameOrCityIncludesMyCity(sellerCity)) {
+                    console.log(sellerName + '\'s city ' + sellerCity + ' includes one of my cities! Keeping :)');
                 }
-                if (!sellerIsInMyCities) {
+                else {
                     element.style.display = 'none';
                 }
             }
