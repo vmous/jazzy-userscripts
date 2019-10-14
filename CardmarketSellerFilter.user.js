@@ -22,6 +22,10 @@ MY_CITIES.add("Athens");
 MY_CITIES.add("Barcelona");
 MY_CITIES.add("BCN");
 MY_CITIES.add("Berlin");
+MY_CITIES.add("Dublin");
+MY_CITIES.add("Leeds");
+MY_CITIES.add("Llobregat"); // BCN
+MY_CITIES.add("Malgrat de Mar"); // BCN
 MY_CITIES.add("Munich");
 MY_CITIES.add("München");
 MY_CITIES.add("Muenchen");
