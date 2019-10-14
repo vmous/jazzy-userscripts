@@ -46,13 +46,13 @@ function sellerFilterFunction() {
     var elements = $(".article-row"); //document.getElementsByClassName("article-row");
     for(let element of elements)
     {
-        if (element.style.display === 'none') {
-            continue;
-        }
         var sellerInfoPageURL = element.querySelector('a').href;
         var sellerName = element.querySelector('a').text;
-        if (sellerNameOrCityIncludesMyCity(sellerName)) {
-            console.log(sellerName + '\'s name, includes my city ' + myCity + '! Keeping :)');
+        if (element.style.display === 'none') {
+            console.log('Seller ' + sellerName + ' already removed...');
+            continue;
+        } else if (sellerNameOrCityIncludesMyCity(sellerName)) {
+            console.log('Keeping seller ' + sellerName + 'because her name includes one of my cities!');
             continue;
         }
         console.log(sellerName + '\'s info page URL: ' + sellerInfoPageURL);
@@ -66,9 +66,9 @@ function sellerFilterFunction() {
                 var sellerIsInMyCities = false;
                 sellerCity = sellerCity.toLowerCase();
                 if (sellerNameOrCityIncludesMyCity(sellerCity)) {
-                    console.log(sellerName + '\'s city ' + sellerCity + ' includes one of my cities! Keeping :)');
-                }
-                else {
+                    console.log('Keeping seller ' + sellerName + 'from ' + sellerCity + '!');
+                } else {
+                    console.log('Removing seller ' + sellerName + ' from ' + sellerCity + '...');
                     element.style.display = 'none';
                 }
             }
@@ -76,6 +76,8 @@ function sellerFilterFunction() {
     }
 }
 
+// TODO: Make this button clickable only if user is logged in because filtering
+// works well only in that case.
 $( document ).ready(function() {
     $(`
 <div id="sellerFilter" class="p-0">
