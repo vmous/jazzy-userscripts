@@ -18,18 +18,30 @@ function getRemote(remote_url) {
 }
 
 var MY_CITIES = new Set();
+MY_CITIES.add("Athena"); // Athens
 MY_CITIES.add("Athens");
+MY_CITIES.add("Argiroupoli"); // Athens
+MY_CITIES.add("Argyroupoli"); // Athens
 MY_CITIES.add("Barcelona");
-MY_CITIES.add("BCN");
+MY_CITIES.add("BCN"); // Barelona
 MY_CITIES.add("Berlin");
+MY_CITIES.add("Cholargos"); // Athens
 MY_CITIES.add("Dublin");
+MY_CITIES.add("Elefsina"); // Athens
+MY_CITIES.add("Galatsi"); // Athens
+MY_CITIES.add("Kifisia"); // Athens
+MY_CITIES.add("Korydallos");
 MY_CITIES.add("Leeds");
-MY_CITIES.add("Llobregat"); // BCN
-MY_CITIES.add("Malgrat de Mar"); // BCN
+MY_CITIES.add("Llobregat"); // Barcelona
+MY_CITIES.add("Marousi"); // Athens
+MY_CITIES.add("Malgrat de Mar"); // Barcelona
 MY_CITIES.add("Munich");
-MY_CITIES.add("München");
-MY_CITIES.add("Muenchen");
-MY_CITIES.add("Pireaus");
+MY_CITIES.add("München"); // Munich
+MY_CITIES.add("Muenchen"); // Munich
+MY_CITIES.add("Peiraeus"); // Athens
+MY_CITIES.add("Peristeri"); // Athens
+MY_CITIES.add("Pireaus"); // Athens
+MY_CITIES.add("Peiraeus"); // Athens
 
 function sellerNameOrCityIncludesMyCity(sellerNameOrCity) {
     var sellerNameOrCityCopy = sellerNameOrCity.toLowerCase();
