@@ -42,7 +42,21 @@ function sellerNameOrCityIncludesMyCity(sellerNameOrCity) {
     return false;
 }
 
-function sellerFilterFunction() {
+function loadAllSellers() {
+    //alert("Number of elements is: " + $(".article-row").length);
+    let interval = window.setInterval(() => {
+        var loadMoreButton = document.getElementById("loadMoreButton");
+        if (!!loadMoreButton && loadMoreButton.style.display !== 'none') {
+            loadMoreButton.click();
+        } else {
+            if (!!interval) {
+                window.clearInterval(interval);
+            }
+        }
+    },3000);
+}
+
+function sellerFilter() {
     var elements = $(".article-row"); //document.getElementsByClassName("article-row");
     for(let element of elements)
     {
@@ -76,11 +90,15 @@ function sellerFilterFunction() {
     }
 }
 
-// TODO: Make this button clickable only if user is logged in because filtering
-// works well only in that case.
 $( document ).ready(function() {
+    // TODO: Make buttons clickable only if user is logged in because filtering works well only in that case.
     $(`
-<div id="sellerFilter" class="p-0">
+<div id="loadAllSellersDiv" class="p-0">
+    <button type="submit" id="loadAllSellersButton" class="btn btn-primary btn-sm btn-block">
+        <span class="fonticon-plus mr-2"></span>
+        <span>Load all sellers</span>
+    </button>
+    <br />
     <button type="submit" id="sellerFilterButton" class="btn btn-primary btn-sm btn-block">
         <span class="fonticon-filter cursor-pointer"></span>
         <span>Filter sellers</span>
@@ -88,7 +106,8 @@ $( document ).ready(function() {
     <br />
 </div>
 `).prependTo( $( ".table.article-table.table-striped" ) );
-    $("#sellerFilterButton").click(sellerFilterFunction);
+    $("#loadAllSellersButton").click(loadAllSellers);
+    $("#sellerFilterButton").click(sellerFilter);
 });
 
 (function() {
