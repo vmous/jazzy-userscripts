@@ -84,21 +84,20 @@ function sellerFilter() {
         console.log(sellerName + '\'s info page URL: ' + sellerInfoPageURL);
         var sellerInfoPageHTML = getRemote(sellerInfoPageURL);
         console.log(sellerName + '\'s info page HTML: ' + sellerInfoPageHTML);
-        $(sellerInfoPageHTML).find('.MKMTable.sellerInfo-table').find('> tbody > tr').each(function() {
-            var col1 = jQuery(this).find("td:eq(0)").text();
-            if (col1 === 'City') {
-                var sellerCity = jQuery(this).find("td:eq(1)").text();
-                console.log(sellerName + '\'s city: ' + sellerCity);
-                var sellerIsInMyCities = false;
-                sellerCity = sellerCity.toLowerCase();
-                if (sellerNameOrCityIncludesMyCity(sellerCity)) {
-                    console.log('Keeping seller ' + sellerName + 'from ' + sellerCity + '!');
-                } else {
-                    console.log('Removing seller ' + sellerName + ' from ' + sellerCity + '...');
-                    element.style.display = 'none';
-                }
-            }
-        });
+        if (sellerInfoPageHTML.trim() === '') {
+            console.log('Could not retrieve seller info page HTML. Skipping...')
+            continue;
+        }
+        var sellerCity = $(sellerInfoPageHTML).find('#PersonalInfoRow').find('.d-flex.align-items-center.justify-content-start.flex-wrap.personalInfo.col-8.col-md-9').text();
+        console.log(sellerName + '\'s city: ' + sellerCity);
+        var sellerIsInMyCities = false;
+        sellerCity = sellerCity.toLowerCase();
+        if (sellerNameOrCityIncludesMyCity(sellerCity)) {
+            console.log('Keeping seller ' + sellerName + 'from ' + sellerCity + '!');
+        } else {
+            console.log('Removing seller ' + sellerName + ' from ' + sellerCity + '...');
+            element.style.display = 'none';
+        }
     }
 }
 
