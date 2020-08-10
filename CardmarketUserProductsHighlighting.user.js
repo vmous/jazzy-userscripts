@@ -29,7 +29,7 @@ $( document ).ready(function() {
     alert('Ready?');
 
     $(document).find('div.table.article-table.table-striped').find('> div.table-body > div').each(function() {
-        var product = jQuery(this).find('> div.col-sellerProductInfo.col > div.row.no-gutters > div.col-seller.col-12.col-md-auto');
+        var product = jQuery(this).find('> div.col-sellerProductInfo.col > div.row.no-gutters > div.col-seller.col-12.col-lg-auto');
         var productName = product.text();
         var productPageURL = product.find('> a')[0].href;
 
