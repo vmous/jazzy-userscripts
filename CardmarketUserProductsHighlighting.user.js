@@ -26,7 +26,9 @@ function cleanPriceStr(priceStr) {
 }
 
 $( document ).ready(function() {
-    alert('Ready?');
+    if (confirm("Skip product highligthing?") == true) {
+        return
+    }
 
     $(document).find('div.table.article-table.table-striped').find('> div.table-body > div').each(function() {
         var product = jQuery(this).find('> div.col-sellerProductInfo.col > div.row.no-gutters > div.col-seller.col-12.col-lg-auto');
