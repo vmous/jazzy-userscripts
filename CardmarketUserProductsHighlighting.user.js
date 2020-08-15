@@ -19,13 +19,20 @@ function ajaxAsyncCall(remote_url) {
 
 function manipulateProductOfferElement(productOfferElement, productPageHTML, textStatus, jqXHR) {
 //    console.log(productOfferElement)
+//    console.log(productPageHTML)
+//    console.log(textStatus)
+//    console.log( jqXHR ); // Alerts 200
 
     // Product information
     var product = productOfferElement.find('> div.col-sellerProductInfo.col > div.row.no-gutters > div.col-seller.col-12.col-lg-auto');
     var productName = product.text();
     var productPageURL = product.find('> a')[0].href;
-    console.log(productName + ' @ ' + productPageURL + ': ' + textStatus);
-    //console.log( jqXHR ); // Alerts 200
+    console.log(productName + ' @ ' + productPageURL);
+    if (productPageHTML === "") {
+        console.log("Retrieved empty HTML. Try again later.")
+        productOfferElement.css("background", "grey");
+        return
+    }
 
     // Offer price (or playset PPU)
     var offer = productOfferElement.find('> div.col-offer > div.price-container.d-none.d-md-flex.justify-content-end > div.d-flex.flex-column');
@@ -75,18 +82,16 @@ function manipulateProductOfferElement(productOfferElement, productPageHTML, tex
     productPageOffersPriceAvgFloat = productPageOffersPriceSumFloat/productPageOffersCount;
 //    console.log('count: ' + productPageOffersCount + '| sum: ' + productPageOffersPriceSumFloat + ' | avg: ' + productPageOffersPriceAvgFloat + ' | min price: ' + productPageOffersPriceMinFloat);
 
-    productOfferElement.css('border-style', 'solid');
-    productOfferElement.css('border-width', 'thick');
     if (offerPriceFloat <= productPageOffersPriceMinFloat) {
-        productOfferElement.css("border-color", "limegreen");
+        productOfferElement.css("background", "limegreen");
     } else if (offerPriceFloat <= productPageOffersPriceAvgFloat) {
-        productOfferElement.css("border-color", "lime");
+        productOfferElement.css("background", "lime");
     } else if (offerPriceFloat <= productPriceAvg30Float) {
-        productOfferElement.css("border-color", "greenyellow");
+        productOfferElement.css("background", "greenyellow");
     } else if (offerPriceFloat > productPriceFromFloat && offerPriceFloat > productPriceTrendFloat && offerPriceFloat > productPriceAvg30Float && offerPriceFloat > productPriceAvg7Float && offerPriceFloat > productPriceAvg1Float){
-        productOfferElement.css("border-color", "red");
+        productOfferElement.css("background", "red");
     } else {
-        productOfferElement.css("border-color", "yellow");
+        productOfferElement.css("background", "yellow");
     }
 }
 
